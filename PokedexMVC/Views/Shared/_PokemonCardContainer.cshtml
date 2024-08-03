@@ -1,16 +1,7 @@
-﻿@model PokedexMVC.ViewModels.HomeViewModel
+﻿@model HomeViewModel
 
 <div id="display" data-max-page="@Model.MaxPage">
     @foreach(var pokemon in Model.Pokemons) {
-        <div class="pokemonCard @pokemon.type[0]">
-            <p class="pokemonCardTitle"><sup class="smaller">#</sup>@pokemon.number @pokemon.name</p>
-            <div class="pokemonCardTypeContainer">
-                @foreach (var t in pokemon.type)
-                {
-                    <span class="color-@t">@t</span>
-                }
-            </div>
-            <img src="@pokemon.image.small" />
-        </div>
+        <partial name="_PokemonCard" model="@pokemon" />
     }
 </div>

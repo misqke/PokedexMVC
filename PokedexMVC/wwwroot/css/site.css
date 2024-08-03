@@ -23,7 +23,8 @@
     --steel: #B7B7C;
     --fairy: #D685AD;
 
-    --card-gradient-end: 30%;
+    --card-gradient-end: 35%;
+    --card-gradient-loc: 70%;
 }
 
 * {
@@ -54,6 +55,10 @@ main {
     flex-direction: row;
     gap: 1rem;
     align-items: center;
+}
+
+.row.between {
+    justify-content: space-between;
 }
 
 button {
@@ -128,16 +133,17 @@ button {
 
 .smaller {
     font-size: 1.5rem;
+    /*vertical-align: super;*/
 }
 
 .pokemonCardTypeContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 1rem;
+    gap: .5rem;
     margin-top: .5rem;
-    font-weight: bold;
-    font-size: 1.25rem;
+    
+    font-size: 1rem;
     margin-left: .5rem;
 }
 
@@ -153,11 +159,24 @@ button {
     overflow: hidden;
 }
 
+.pokemonCard .row {
+    z-index: 2;
+    position: relative;
+    
+}
+
+    .pokemonCard .row p {
+        text-shadow: 1px 1px 1px var(--bg),
+            -1px -1px 1px var(--bg),
+            -1px 1px 1px var(--bg),
+            1px -1px 1px var(--bg);
+    }
+
     .pokemonCard img {
         width: 100px;
         height: auto;
         position: absolute;
-        right: calc(20% - 50px);
+        right: calc(calc(100% - var(--card-gradient-loc)) - 50px);
         top: 50%;
         transform: translateY(-50%);
         z-index: 1;
@@ -170,71 +189,71 @@ button {
 
 
 .pokemonCard.Water {
-    background: radial-gradient(circle at 80%, var(--water) 0%, var(--bg) var(--card-gradient-end));
+    background: radial-gradient(circle at var(--card-gradient-loc), var(--water) 0%, var(--bg) var(--card-gradient-end));
 }
 
     .pokemonCard.Fire {
-        background: radial-gradient(circle at 80%, var(--fire) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--fire) 0%, var(--bg) var(--card-gradient-end));
     }
 
     .pokemonCard.Grass {
-        background: radial-gradient(circle at 80%, var(--grass) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--grass) 0%, var(--bg) var(--card-gradient-end));
     }
 
     .pokemonCard.Poison {
-        background: radial-gradient(circle at 80%, var(--poison) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--poison) 0%, var(--bg) var(--card-gradient-end));
     }
 
     .pokemonCard.Flying {
-        background: radial-gradient(circle at 80%, var(--flying) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--flying) 0%, var(--bg) var(--card-gradient-end));
     }
 
     .pokemonCard.Fighting {
-        background: radial-gradient(circle at 80%, var(--fighting) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--fighting) 0%, var(--bg) var(--card-gradient-end));
     }
 
     .pokemonCard.Rock {
-        background: radial-gradient(circle at 80%, var(--rock) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--rock) 0%, var(--bg) var(--card-gradient-end));
     }
 
     .pokemonCard.Ground {
-        background: radial-gradient(circle at 80%, var(--ground) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--ground) 0%, var(--bg) var(--card-gradient-end));
     }
 
     .pokemonCard.Electric {
-        background: radial-gradient(circle at 80%, var(--electric) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--electric) 0%, var(--bg) var(--card-gradient-end));
     }
 
     .pokemonCard.Steel {
-        background: radial-gradient(circle at 80%, var(--steel) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--steel) 0%, var(--bg) var(--card-gradient-end));
     }
 
     .pokemonCard.Psychic {
-        background: radial-gradient(circle at 80%, var(--psychic) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--psychic) 0%, var(--bg) var(--card-gradient-end));
     }
 
     .pokemonCard.Ghost {
-        background: radial-gradient(circle at 80%, var(--ghost) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--ghost) 0%, var(--bg) var(--card-gradient-end));
     }
     .pokemonCard.Dragon {
-        background: radial-gradient(circle at 80%, var(--dragon) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--dragon) 0%, var(--bg) var(--card-gradient-end));
     }
     .pokemonCard.Bug {
-        background: radial-gradient(circle at 80%, var(--bug) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--bug) 0%, var(--bg) var(--card-gradient-end));
     }
     .pokemonCard.Ice {
-        background: radial-gradient(circle at 80%, var(--ice) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--ice) 0%, var(--bg) var(--card-gradient-end));
     }
 
     .pokemonCard.Dark {
-        background: radial-gradient(circle at 80%, var(--dark) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--dark) 0%, var(--bg) var(--card-gradient-end));
     }
 
     .pokemonCard.Fairy {
-        background: radial-gradient(circle at 80%, var(--fairy) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--fairy) 0%, var(--bg) var(--card-gradient-end));
     }
     .pokemonCard.Normal {
-        background: radial-gradient(circle at 80%, var(--normal) 0%, var(--bg) var(--card-gradient-end));
+        background: radial-gradient(circle at var(--card-gradient-loc), var(--normal) 0%, var(--bg) var(--card-gradient-end));
     }
 
 
@@ -330,5 +349,11 @@ button {
 @media screen and (max-width: 600px) {
     #display {
         grid-template-columns: 1fr;
+        margin-top: 8.5rem;
+    }
+    #header-inner #top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .5rem;
     }
 }

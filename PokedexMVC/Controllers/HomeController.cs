@@ -19,7 +19,7 @@ namespace PokedexMVC.Controllers
             _logger = logger;
             _environment = environment;
             var rootPath = environment.ContentRootPath;
-            var path = Path.Combine(rootPath, "data/pokemon.json");
+            var path = Path.Combine(rootPath, "pokemon.json");
             string jsonData = System.IO.File.ReadAllText(path);
             Pokemon = JsonSerializer.Deserialize<List<Pokemon>>(jsonData);
         }

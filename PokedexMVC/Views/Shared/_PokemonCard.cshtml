@@ -1,0 +1,16 @@
+﻿@model Pokemon
+
+<div class="pokemonCard @Model.type[0]">
+    <div class="row between">
+        <p class="pokemonCardTitle"> @Model.name </p><p class="smaller"><sup>#</sup>@Model.number</p>
+        
+    </div>
+    <div class="pokemonCardTypeContainer">
+        @foreach (var t in Model.type)
+        {
+            <span class="color-@t">@t</span>
+        }
+    </div>
+    
+    <img src="@Model.image.small" />
+</div>
