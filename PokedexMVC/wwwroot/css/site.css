@@ -1,0 +1,258 @@
+:root {
+    background: #131313;
+    --bg: #000;
+    --text: #fff;
+    --normal: #A8A77A;
+    --fire: #EE8130;
+    --water: #6390F0;
+    --electric: #F7D02C; 
+    --grass: #7AC74C; 
+     --ice: #96D9D6;
+     --fighting: #C22E28;
+        --poison: #A33EA1;
+        --ground: #E2BF65;
+        --flying: #A98FF3;
+        --psychic: #F95587;
+        --bug: #A6B91A;
+        --rock: #B6A136;
+        --ghost: #735797;
+        --dragon: #6F35FC;
+        --dark: #705746;
+        --steel: #B7B7C;
+        --fairy: #D685AD;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        background: #efefef;
+        --bg: #fff;
+        --text: #101010;
+
+    }
+}
+
+
+main {
+    padding: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+#display {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 100%;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.pokemonCardTitle {
+    font-size: 2rem;
+    z-index: 2;
+    position: relative;
+}
+
+.smaller {
+    font-size: 1.5rem;
+}
+
+.pokemonCardTypeContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin-top: .5rem;
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-left: 1rem;
+}
+
+
+.pokemonCard {
+    position: relative;
+    width: 100%;
+    padding: 1rem 1rem 2rem;
+    color: var(--text);
+    border-radius: .5rem;
+}
+
+    .pokemonCard img {
+        width: 100px;
+        height: auto;
+        position: absolute;
+        right: calc(20% - 50px);
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+    }
+
+
+.pokemonCard.Water {
+    background: radial-gradient(circle at 80%, var(--water) 0%, var(--bg) 30%);
+}
+
+.pokemonCard.Fire {
+    background: radial-gradient(circle at 80%, var(--fire) 0%, var(--bg) 30%);
+}
+
+.pokemonCard.Grass {
+    background: radial-gradient(circle at 80%, var(--grass) 0%, var(--bg) 30%);
+}
+
+.pokemonCard.Poison {
+    background: radial-gradient(circle at 80%, var(--poison) 0%, var(--bg) 30%);
+}
+
+.pokemonCard.Flying {
+    background: radial-gradient(circle at 80%, var(--flying) 0%, var(--bg) 30%);
+}
+
+.pokemonCard.Fighting {
+    background: radial-gradient(circle at 80%, var(--fighting) 0%, var(--bg) 30%);
+}
+
+.pokemonCard.Rock {
+    background: radial-gradient(circle at 80%, var(--rock) 0%, var(--bg) 30%);
+}
+
+.pokemonCard.Ground {
+    background: radial-gradient(circle at 80%, var(--ground) 0%, var(--bg) 30%);
+}
+
+.pokemonCard.Electric {
+    background: radial-gradient(circle at 80%, var(--electric) 0%, var(--bg) 30%);
+}
+
+.pokemonCard.Steel {
+    background: radial-gradient(circle at 80%, var(--steel) 0%, var(--bg) 30%);
+}
+
+.pokemonCard.Psychic {
+    background: radial-gradient(circle at 80%, var(--psychic) 0%, var(--bg) 30%);
+}
+
+    .pokemonCard.Ghost {
+        background: radial-gradient(circle at 80%, var(--ghost) 0%, var(--bg) 30%);
+    }
+    .pokemonCard.Dragon {
+        background: radial-gradient(circle at 80%, var(--dragon) 0%, var(--bg) 30%);
+    }
+    .pokemonCard.Bug {
+        background: radial-gradient(circle at 80%, var(--bug) 0%, var(--bg) 30%);
+    }
+    .pokemonCard.Ice {
+        background: radial-gradient(circle at 80%, var(--ice) 0%, var(--bg) 30%);
+    }
+
+    .pokemonCard.Dark {
+        background: radial-gradient(circle at 80%, var(--dark) 0%, var(--bg) 30%);
+    }
+
+    .pokemonCard.Fairy {
+        background: radial-gradient(circle at 80%, var(--fairy) 0%, var(--bg) 30%);
+    }
+    .pokemonCard.Normal {
+        background: radial-gradient(circle at 80%, var(--normal) 0%, var(--bg) 30%);
+    }
+
+
+.color-Water {
+    color: var(--water);
+}
+
+.color-Fire {
+    color: var(--fire);
+}
+
+.color-Grass {
+    color: var(--grass);
+}
+
+.color-Poison {
+    color: var(--poison);
+}
+
+.color-Flying {
+    color: var(--flying);
+}
+
+.color-Fighting {
+    color: var(--fighting);
+}
+
+.color-Rock {
+    color: var(--rock);
+}
+
+.color-Ground {
+    color: var(--ground);
+}
+
+.color-Electric {
+    color: var(--electric);
+}
+
+.color-Steel {
+    color: var(--steel);
+}
+
+.color-Psychic {
+    color: var(--psychich);
+}
+
+.color-Ghost {
+    color: var(--ghost);
+}
+
+.color-Dragon {
+    color: var(--dragon);
+}
+
+.color-Bug {
+    color: var(--bug);
+}
+.color-Dark {
+    color: var(--dark);
+}
+
+.color-Ice {
+    color: var(--ice);
+}
+
+.color-Fairy {
+    color: var(--fairy);
+}
+
+.color-Normal {
+    color: var(--normal);
+}
+
+
+
+@media screen and (max-width: 1380px) {
+    #display {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .pokemonCardTitle {
+        font-size: 1.75rem;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #display {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #display {
+        grid-template-columns: 1fr;
+    }
+}
