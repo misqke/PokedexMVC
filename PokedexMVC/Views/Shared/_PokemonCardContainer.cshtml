@@ -1,6 +1,6 @@
 ﻿@model PokedexMVC.ViewModels.HomeViewModel
 
-<div id="display">
+<div id="display" data-max-page="@Model.MaxPage">
     @foreach(var pokemon in Model.Pokemons) {
         <div class="pokemonCard @pokemon.type[0]">
             <p class="pokemonCardTitle"><sup class="smaller">#</sup>@pokemon.number @pokemon.name</p>

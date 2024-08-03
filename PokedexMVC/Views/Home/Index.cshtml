@@ -3,16 +3,24 @@
 
 <main>
     <div id="header">
-        <h1>Pokemon</h1>
-        <form id="search-form">
-            <input id="search-input" type="text" />
-            <button type="submit" form="search-form">Search</button>
-        </form>
+        <div id="header-inner">
+            <div id="top-bar">
+                <h1>Pokemon</h1>
+                <form id="search-form">
+                    <div class="row">
+                        <input id="search-input" type="text" />
+                        <button type="submit" form="search-form">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <div id="display-container">
         <partial name="_PokemonCardContainer" model="@Model" />
     </div>
+
+    <button type="button" id="get-more-button">More</button>
 
 
 </main>
