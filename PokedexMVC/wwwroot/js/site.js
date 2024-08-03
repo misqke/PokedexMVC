@@ -7,10 +7,13 @@ window.onload = async () => {
     const searchForm = document.getElementById("search-form");
     const displayContainer = document.getElementById("display-container");
     const getMoreBtn = document.getElementById("get-more-button");
+    const modalOverlay = document.getElementById("modal-overlay");
+    const modal = document.getElementById("modal");
 
     // state
     let page = 1;
     let maxPage = parseInt(document.getElementById("display").getAttribute("data-max-page"));
+    let currentCard = null;
 
     // functions
     const handleGetMoreButton = () => {
@@ -20,7 +23,6 @@ window.onload = async () => {
             getMoreBtn.classList.remove("hide");
         }
     }
-
 
     const searchPokemon = async () => {
         const res = await fetch(`/home/search/?s=${searchInput.value}`);
@@ -40,6 +42,51 @@ window.onload = async () => {
         handleGetMoreButton();
     }
 
+
+    const toggleModal = async (card) => {
+        if (card) {
+            const inner = card.querySelector(".pokemonCard");
+            if (!document.startViewTransition) {
+                modal.append(inner);
+                modalOverlay.classList.add("open");
+            } else {
+                inner.style.viewTransitionName = "move-in";
+                const transition = document.startViewTransition(() => {
+                    modal.append(inner);
+                    modalOverlay.classList.add("open");
+                });
+                await transition.ready;
+                inner.style.viewTransitionName = "";
+            }
+            currentCard = card;
+        }
+        else {
+            const inner = modal.querySelector(".pokemonCard");
+            if (!document.startViewTransition) {
+                modalOverlay.classList.remove("open");
+                currentCard.append(inner);
+            } else {
+                inner.style.viewTransitionName = "move-out";
+                const transition = document.startViewTransition(() => {
+                    modalOverlay.classList.remove("open");
+                    currentCard.append(inner);
+                });
+                await transition.ready;
+                inner.style.viewTransitionName = "";
+            }
+            
+            currentCard = null;
+        }
+        
+    }
+
+    const setCardListeners = () => {
+        const cards = document.querySelectorAll(".pokemonCardContainer");
+        cards.forEach(card => {
+            card.addEventListener("click", (e) => toggleModal(card));
+        })
+    }
+
     // event listeners
     searchForm.onsubmit = async (e) => {
         e.preventDefault();
@@ -52,4 +99,10 @@ window.onload = async () => {
         await searchMorePokemon();
     }
 
+    modalOverlay.addEventListener("click", (e) => {
+        if (e.target == modalOverlay) toggleModal();
+    })
+
+    // run
+    setCardListeners();
 }

@@ -1,16 +1,21 @@
 ﻿@model Pokemon
 
-<div class="pokemonCard @Model.type[0]">
-    <div class="row between">
-        <p class="pokemonCardTitle"> @Model.name </p><p class="smaller"><sup>#</sup>@Model.number</p>
-        
+<div id="card-@Model.number" class="pokemonCardContainer">
+    <div class="pokemonCard @Model.type[0]">
+        <div class="row between">
+            <p class="pokemonCardTitle"> @Model.name </p><p class="smaller"><sup>#</sup>@Model.number</p>
+
+        </div>
+        <div class="pokemonCardTypeContainer">
+            @foreach (var t in Model.type)
+            {
+                <span class="color-@t">@t</span>
+            }
+        </div>
+        <div class="pokemonCardDetails">
+            <p>@Model.description1</p>
+            <p>@Model.description2</p>
+        </div>
+        <img src="@Model.image.large" loading="lazy" />
     </div>
-    <div class="pokemonCardTypeContainer">
-        @foreach (var t in Model.type)
-        {
-            <span class="color-@t">@t</span>
-        }
-    </div>
-    
-    <img src="@Model.image.small" />
 </div>
