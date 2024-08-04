@@ -4,16 +4,26 @@
 <main>
     <div id="header">
         <div id="header-inner">
-            <div id="top-bar">
-                <h1>Pokedex</h1>
-                <form id="search-form">
-                    <div class="row">
+            <form id="search-form">
+                <div class="row between">
+                    <h1>Pokedex</h1>
+                    <div>
                         <input id="search-input" type="text" />
                         <button type="submit" form="search-form">Search</button>
                     </div>
-                </form>
+                </div>
+                <div class="row end search-types-container">
+                @foreach (var t in Model.Types)
+                {
+                        <label data-type="@t"><input type="checkbox" id="search-@t" data-type="@t" />@t</label>
+                }
+                </div>
+            </form>
+            <div>
+                <button id="header-toggle-btn" type="button">vv</button>
             </div>
         </div>
+        
     </div>
 
     <div id="display-container">

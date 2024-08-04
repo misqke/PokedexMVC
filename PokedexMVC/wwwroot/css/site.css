@@ -28,10 +28,15 @@ main {
     flex-direction: row;
     gap: 1rem;
     align-items: center;
+    width: 100%;
 }
 
 .row.between {
     justify-content: space-between;
+}
+
+.row.end {
+    justify-content: flex-end;
 }
 
 button {
@@ -55,25 +60,29 @@ button {
 #header-inner {
     max-width: 1400px;
     margin: 0 auto;
-    display: grid;
-    grid-template-rows: auto 0;
-    padding: 1rem;
+    position: relative;
 }
 
-    #header-inner #top-bar {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
+#header-toggle-btn {
+    position: absolute;
+    right: 1rem;
+    top: 100%;
+    border-color: var(--border);
+    border-top-color: var(--bg);
+    padding: 0rem 2rem .25rem;
 
-    #header-inner #top-bar form {
+}
+
+    #search-form {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+        overflow: hidden;
+        padding: 1rem;
     }
 
-        #header-inner #top-bar form input[type=text] {
+
+        #search-form input[type=text] {
             font-size: 1rem;
             padding: .5rem;
             background: var(--bg-light);
@@ -85,13 +94,33 @@ button {
             color: var(--text);
             font-size: 3rem;
         }
+        .search-types-container {
+            overflow: hidden;
+            max-width: 500px;
+            flex-wrap: wrap;
+            height: 0;
+        }
+        .search-types-container input {
+            display: none;
+        }
+
+        .search-types-container label {
+            color: var(--text);
+            cursor: pointer;
+            transition: color 250ms;
+        }
+
+        #header-inner.open .search-types-container {
+            animation: open 550ms linear forwards;
+            padding: .5rem;
+        }
 
 #display {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     width: 100%;
     gap: 1.5rem;
-    margin: 6rem 0rem 2rem;
+    margin: 7rem 0rem 2rem;
 }
 
 .hide {
@@ -258,7 +287,7 @@ button {
 
 #modal-overlay.open .stats-bar-inner {
     animation: grow-up 500ms ease-out forwards;
-    animation-duration: calc(var(--value) * 200ms);
+    animation-duration: calc(var(--value) * 150ms);
     
 }
 
@@ -279,6 +308,11 @@ button {
             to {
                 height: calc(var(--value) / 12 * 100%);
             }
+        }
+
+        @keyframes open {
+            from {height: 0%}
+            to {height: 100%}
         }
 
 @media screen and (max-width: 1380px) {
@@ -316,6 +350,9 @@ button {
         grid-template-columns: 1fr;
         margin-top: 8.5rem;
         
+    }
+    #header h1 {
+        font-size: 2rem;
     }
     #header-inner #top-bar {
         flex-direction: column;

@@ -9,6 +9,10 @@ window.onload = async () => {
     const getMoreBtn = document.getElementById("get-more-button");
     const modalOverlay = document.getElementById("modal-overlay");
     const modal = document.getElementById("modal");
+    const searchToggleBtn = document.getElementById("header-toggle-btn");
+    const headerInner = document.getElementById("header-inner");
+    const typeCheckBoxes = document.querySelectorAll(".search-types-container input");
+    const typeLabels = document.querySelectorAll(".search-types-container label");
 
     // state
     let page = 1;
@@ -25,7 +29,11 @@ window.onload = async () => {
     }
 
     const searchPokemon = async () => {
-        const res = await fetch(`/home/search/?s=${searchInput.value}`);
+        const types = [];
+        typeCheckBoxes.forEach(cb => {
+            if (cb.checked) types.push(cb.getAttribute("data-type"));
+        })
+        const res = await fetch(`/home/search/?s=${searchInput.value}&t=${types.join(",")}`);
         const data = await res.text();
         displayContainer.innerHTML = "";
         displayContainer.innerHTML = data;
@@ -36,7 +44,11 @@ window.onload = async () => {
     }
 
     const searchMorePokemon = async () => {
-        const res = await fetch(`/home/search/?s=${searchInput.value}&page=${page}`);
+        const types = [];
+        typeCheckBoxes.forEach(cb => {
+            if (cb.checked) types.push(cb.getAttribute("data-type"));
+        })
+        const res = await fetch(`/home/search/?s=${searchInput.value}&page=${page}&t=${types.join(",")}`);
         const data = await res.text();
         const display = document.getElementById("display");
         display.innerHTML = display.innerHTML.concat(data);
@@ -103,6 +115,20 @@ window.onload = async () => {
 
     modalOverlay.addEventListener("click", (e) => {
         if (e.target == modalOverlay) toggleModal();
+    })
+
+    searchToggleBtn.addEventListener("click", (e) => {
+        headerInner.classList.toggle("open");
+    })
+
+    typeLabels.forEach(l => {
+        l.addEventListener("click", (e) => {
+            const check = l.querySelector("input");
+            const type = e.currentTarget.getAttribute("data-type");
+
+            if (check.checked) e.currentTarget.classList.add(`color-${type}`)
+            else e.currentTarget.classList.remove(`color-${type}`)
+        })
     })
 
     // run

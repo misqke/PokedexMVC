@@ -102,75 +102,75 @@
 
 
 .color-Water {
-    color: var(--water);
+    color: var(--water) !important;
 }
 
 .color-Fire {
-    color: var(--fire);
+    color: var(--fire) !important;
 }
 
 .color-Grass {
-    color: var(--grass);
+    color: var(--grass) !important;
 }
 
 .color-Poison {
-    color: var(--poison);
+    color: var(--poison) !important;
 }
 
 .color-Flying {
-    color: var(--flying);
+    color: var(--flying) !important;
 }
 
 .color-Fighting {
-    color: var(--fighting);
+    color: var(--fighting) !important;
 }
 
 .color-Rock {
-    color: var(--rock);
+    color: var(--rock) !important;
 }
 
 .color-Ground {
-    color: var(--ground);
+    color: var(--ground) !important;
 }
 
 .color-Electric {
-    color: var(--electric);
+    color: var(--electric) !important;
 }
 
 .color-Steel {
-    color: var(--steel);
+    color: var(--steel) !important;
 }
 
 .color-Psychic {
-    color: var(--psychic);
+    color: var(--psychic) !important;
 }
 
 .color-Ghost {
-    color: var(--ghost);
+    color: var(--ghost) !important;
 }
 
 .color-Dragon {
-    color: var(--dragon);
+    color: var(--dragon) !important;
 }
 
 .color-Bug {
-    color: var(--bug);
+    color: var(--bug) !important;
 }
 
 .color-Dark {
-    color: var(--dark);
+    color: var(--dark) !important;
 }
 
 .color-Ice {
-    color: var(--ice);
+    color: var(--ice) !important;
 }
 
 .color-Fairy {
-    color: var(--fairy);
+    color: var(--fairy) !important;
 }
 
 .color-Normal {
-    color: var(--normal);
+    color: var(--normal) !important;
 }
 
 

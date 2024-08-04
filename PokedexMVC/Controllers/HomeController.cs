@@ -13,6 +13,8 @@ namespace PokedexMVC.Controllers
         private readonly List<Pokemon> Pokemon;
         private readonly IWebHostEnvironment _environment;
         private readonly int PerPage = 24;
+        private readonly List<string> Types = new List<string> { "Water", "Fire", "Grass", "Normal", "Electric", "Poison", 
+            "Bug", "Ground", "Rock", "Flying", "Psychic", "Steel", "Dark", "Fairy", "Dragon", "Fighting", "Ice"};
 
         public HomeController(ILogger<HomeController> logger, IWebHostEnvironment environment)
         {
@@ -34,20 +36,33 @@ namespace PokedexMVC.Controllers
             viewModel.Pokemons = pokemons;
             viewModel.Page = 1;
             viewModel.MaxPage = (int)Math.Ceiling((double)Pokemon.Count / (double)PerPage);
+            viewModel.Types = Types.OrderBy(t => t).ToList();
             return View(viewModel);
         }
 
         [HttpGet]
-        public IActionResult Search([FromQuery] string s, int page = 1)
+        public IActionResult Search([FromQuery] string s, string t, int page = 1)
         {
             var viewModel = new HomeViewModel();
             viewModel.Page = page;
+            List<Pokemon> pokemons = Pokemon;
 
-            List<Pokemon> pokemons = new List<Pokemon>();
+
+            if (!string.IsNullOrEmpty(t)) {
+                List<string> types = t.Split(',').ToList();
+                if (types.Count > 0)
+                {
+                    foreach (var type in types)
+                    {
+                        pokemons = pokemons.Where(p => p.type.Contains(type)).ToList();
+                    }
+                }
+            }
+
             if (string.IsNullOrEmpty(s))
             {
-                pokemons = Pokemon.Skip(PerPage * (page-1)).Take(PerPage).ToList();
-                viewModel.MaxPage = (int)Math.Ceiling((double)Pokemon.Count / (double)PerPage);
+                viewModel.MaxPage = (int)Math.Ceiling((double)pokemons.Count / (double)PerPage);
+                pokemons = pokemons.Skip(PerPage * (page-1)).Take(PerPage).ToList();
             }
             else
             {
@@ -55,11 +70,11 @@ namespace PokedexMVC.Controllers
                 
                 if (isInt)
                 {
-                    pokemons = Pokemon.Where(p => p.number.ToString().Contains(s)).ToList();
+                    pokemons = pokemons.Where(p => p.number.ToString().Contains(s)).ToList();
                 }
                 else
                 {
-                    pokemons = Pokemon.Where(p => p.name.Contains(s, StringComparison.CurrentCultureIgnoreCase)).ToList();
+                    pokemons = pokemons.Where(p => p.name.Contains(s, StringComparison.CurrentCultureIgnoreCase)).ToList();
                 }
 
                 viewModel.MaxPage = (int)Math.Ceiling((double)pokemons.Count / (double)PerPage);
