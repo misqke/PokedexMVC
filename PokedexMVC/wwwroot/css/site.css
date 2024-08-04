@@ -116,22 +116,27 @@ button {
     gap: .5rem;
     margin-top: .5rem;
     font-size: 1rem;
-}
-
-
-.pokemonCard {
     position: relative;
-    width: 100%;
-    padding: 1rem 1rem 3rem;
-    color: var(--text);
-    border-radius: .5rem;
-    cursor: pointer;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    display: grid;
-    grid-template-rows: auto auto 0px;
-    transition: grid-template-rows 500ms;
+    z-index: 2;
 }
+
+    .pokemonCardTypeContainer span {
+        text-shadow: 1px 1px 1px var(--bg), -1px -1px 1px var(--bg), -1px 1px 1px var(--bg), 1px -1px 1px var(--bg);
+    }
+
+    .pokemonCard {
+        position: relative;
+        width: 100%;
+        padding: 1rem 1rem 3rem;
+        color: var(--text);
+        border-radius: .5rem;
+        cursor: pointer;
+        border: 1px solid var(--border);
+        overflow: hidden;
+        display: grid;
+        grid-template-rows: auto auto 0px;
+        transition: grid-template-rows 500ms;
+    }
 
     .pokemonCard  p {
         max-width: 350px;
@@ -147,7 +152,7 @@ button {
         width: 100px;
         height: auto;
         position: absolute;
-        right: calc(calc(100% - var(--card-gradient-loc)) - 50px);
+        right: calc(calc(100% - var(--card-image-loc)) - 50px);
         top: 50%;
         transform: translateY(-50%);
         z-index: 1;
@@ -184,13 +189,15 @@ button {
     animation: fade-in 250ms linear forwards;
 }
 
-#modal-overlay.open .pokemonCard {
-    width: 800px;
-    max-width: 90vw;
-    grid-template-rows: auto auto 1fr;
-    cursor: unset;
-    padding: 2rem 2rem 2rem;
-}
+    #modal-overlay.open .pokemonCard {
+        width: 800px;
+        max-width: 90vw;
+        grid-template-rows: auto auto 1fr;
+        cursor: unset;
+        padding: 2rem 2rem 2rem;
+        --card-gradient-end: 45%;
+        --card-gradient-loc: 70% 33%;
+    }
 
     #modal-overlay.open .pokemonCard p.smaller {
         font-size: 2rem;
@@ -211,9 +218,48 @@ button {
     }
 
     #modal-overlay.open .pokemonCard img {
-        width: 300px;
-        right: calc(calc(100% - var(--card-gradient-loc)) - 150px);
+        width: 350px;
+        right: calc(calc(100% - var(--card-image-loc)) - 175px);
+        top: 33%;
     }
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: .5rem;
+    height: 400px;
+}
+
+.stats-container .text {
+    font-size: 1rem;
+    color: var(--text);
+    text-align: center;
+}
+
+.stats-bar-container {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: .25rem;
+}
+
+.stats-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.stats-bar-inner {
+    height: 0;
+    width: 100%;
+    border: 1px solid var(--bg);
+    opacity: .5;
+}
+
+#modal-overlay.open .stats-bar-inner {
+    animation: grow-up 500ms ease-out forwards;
+    animation-duration: calc(var(--value) * 200ms);
+    
+}
 
 
         @keyframes fade-in {
@@ -223,7 +269,16 @@ button {
             to {
                 opacity: 1;
                 }
+        }
+
+        @keyframes grow-up {
+            from {
+                height: 0%;
             }
+            to {
+                height: calc(var(--value) / 12 * 100%);
+            }
+        }
 
 @media screen and (max-width: 1380px) {
     #display {
@@ -239,16 +294,43 @@ button {
     #display {
         grid-template-columns: 1fr 1fr;
     }
+    #modal-overlay.open .pokemonCard img {
+        width: 300px;
+        right: calc(calc(100% - var(--card-image-loc)) - 150px);
+    }
+    .stats-container {
+        height: 350px;
+    }
 }
 
 @media screen and (max-width: 600px) {
+    html {
+        font-size: 14px;
+    }
     #display {
         grid-template-columns: 1fr;
         margin-top: 8.5rem;
+        
     }
     #header-inner #top-bar {
         flex-direction: column;
         align-items: flex-start;
         gap: .5rem;
+    }
+    #modal {
+        max-width: 95%;
+    }
+    #modal-overlay.open .pokemonCard img {
+        width: 250px;
+        right: calc(calc(100% - var(--card-image-loc)) - 125px);
+    }
+    #modal-overlay.open .pokemonCard {
+        padding: 1rem;
+    }
+    .stats-container {
+        height: 300px;
+    }
+    .stats-container .text {
+        font-size: .8rem;
     }
 }

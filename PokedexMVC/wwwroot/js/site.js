@@ -32,14 +32,19 @@ window.onload = async () => {
         maxPage = parseInt(document.getElementById("display").getAttribute("data-max-page"));
         page = 1;
         handleGetMoreButton();
+        setCardListeners();
     }
 
     const searchMorePokemon = async () => {
         const res = await fetch(`/home/search/?s=${searchInput.value}&page=${page}`);
         const data = await res.text();
         const display = document.getElementById("display");
+        const previousCards = document.querySelectorAll(".pokemonCardContainer");
         display.innerHTML = display.innerHTML.concat(data);
+        const allCards = Array.from(document.querySelectorAll(".pokemonCardContainer"));
+        const newCards = allCards.filter((c, i) => i >= previousCards.length);
         handleGetMoreButton();
+        setCardListeners(newCards);
     }
 
 
@@ -80,8 +85,8 @@ window.onload = async () => {
         
     }
 
-    const setCardListeners = () => {
-        const cards = document.querySelectorAll(".pokemonCardContainer");
+    const setCardListeners = (cards) => {
+        if (!cards) cards = document.querySelectorAll(".pokemonCardContainer");
         cards.forEach(card => {
             card.addEventListener("click", (e) => toggleModal(card));
         })

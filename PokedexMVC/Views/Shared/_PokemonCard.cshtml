@@ -13,8 +13,34 @@
             }
         </div>
         <div class="pokemonCardDetails">
+            <p>A @Model.category Pokemon</p>
             <p>@Model.description1</p>
-            <p>@Model.description2</p>
+            <div class="stats-container">
+                <div class="stats-bar-container">
+                    <span class="stats-bar"><span style="--value: @Model.stats.hp" class="stats-bar-inner bg-@Model.type[0]"></span></span>
+                    <span class="text">HP</span>
+                </div>
+                <div class="stats-bar-container">
+                    <span class="stats-bar"><span style="--value: @Model.stats.attack" class="stats-bar-inner bg-@Model.type[0]"></span></span>
+                    <span class="text">Attack</span>
+                </div>
+                <div class="stats-bar-container">
+                    <span class="stats-bar"><span style="--value: @Model.stats.defense" class="stats-bar-inner bg-@Model.type[0]"></span></span>
+                    <span class="text">Defense</span>
+                </div>
+                <div class="stats-bar-container">
+                    <span class="stats-bar"><span style="--value: @Model.stats.specialAttack" class="stats-bar-inner bg-@Model.type[0]"></span></span>
+                    <span class="text">S. Attack</span>
+                </div>
+                <div class="stats-bar-container">
+                    <span class="stats-bar"><span style="--value: @Model.stats.specialDefense" class="stats-bar-inner bg-@Model.type[0]"></span></span>
+                    <span class="text">S. Defense</span>
+                </div>
+                <div class="stats-bar-container">
+                    <span class="stats-bar"><span style="--value: @Model.stats.speed" class="stats-bar-inner bg-@Model.type[0]"></span></span>
+                    <span class="text">Speed</span>
+                </div>
+            </div>
         </div>
         <img src="@Model.image.large" loading="lazy" />
     </div>
