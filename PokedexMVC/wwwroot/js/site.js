@@ -39,12 +39,9 @@ window.onload = async () => {
         const res = await fetch(`/home/search/?s=${searchInput.value}&page=${page}`);
         const data = await res.text();
         const display = document.getElementById("display");
-        const previousCards = document.querySelectorAll(".pokemonCardContainer");
         display.innerHTML = display.innerHTML.concat(data);
-        const allCards = Array.from(document.querySelectorAll(".pokemonCardContainer"));
-        const newCards = allCards.filter((c, i) => i >= previousCards.length);
         handleGetMoreButton();
-        setCardListeners(newCards);
+        setCardListeners();
     }
 
 
