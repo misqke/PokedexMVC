@@ -6,29 +6,25 @@ window.onload = async () => {
     const searchInput = document.getElementById("search-input");
     const searchForm = document.getElementById("search-form");
     const displayContainer = document.getElementById("display-container");
-    const getMoreBtn = document.getElementById("get-more-button");
     const modalOverlay = document.getElementById("modal-overlay");
     const modal = document.getElementById("modal");
     const searchToggleBtn = document.getElementById("header-toggle-btn");
     const headerInner = document.getElementById("header-inner");
     const typeCheckBoxes = document.querySelectorAll(".search-types-container input");
     const typeLabels = document.querySelectorAll(".search-types-container label");
+    const getMoreTrigger = document.getElementById("get-more-trigger")
 
     // state
     let page = 1;
     let maxPage = parseInt(document.getElementById("display").getAttribute("data-max-page"));
     let currentCard = null;
+    const observer = new IntersectionObserver(handleObserver);
+    let loading = false;
 
     // functions
-    const handleGetMoreButton = () => {
-        if (page == maxPage) {
-            getMoreBtn.classList.add("hide");
-        } else {
-            getMoreBtn.classList.remove("hide");
-        }
-    }
 
     const searchPokemon = async () => {
+        loading = true;
         const types = [];
         typeCheckBoxes.forEach(cb => {
             if (cb.checked) types.push(cb.getAttribute("data-type"));
@@ -39,21 +35,34 @@ window.onload = async () => {
         displayContainer.innerHTML = data;
         maxPage = parseInt(document.getElementById("display").getAttribute("data-max-page"));
         page = 1;
-        handleGetMoreButton();
+        if (page === maxPage) getMoreTrigger.style.display = "none";
+        else getMoreTrigger.style.display = "block";
         setCardListeners();
+        loading = false;
     }
 
     const searchMorePokemon = async () => {
+        loading = true;
         const types = [];
         typeCheckBoxes.forEach(cb => {
             if (cb.checked) types.push(cb.getAttribute("data-type"));
         })
-        const res = await fetch(`/home/search/?s=${searchInput.value}&page=${page}&t=${types.join(",")}`);
+        const res = await fetch(`/home/search/?s=${searchInput.value}&page=${++page}&t=${types.join(",")}`);
         const data = await res.text();
         const display = document.getElementById("display");
         display.innerHTML = display.innerHTML.concat(data);
-        handleGetMoreButton();
         setCardListeners();
+        if (page === maxPage) getMoreTrigger.style.display = "none";
+        loading = false;
+    }
+
+    async function handleObserver(enties, observer) {
+        if (page === maxPage || loading) return;
+        const loader = enties[0];
+        if (loader.isIntersecting) {
+            await searchMorePokemon();
+        }
+        
     }
 
 
@@ -107,12 +116,6 @@ window.onload = async () => {
         await searchPokemon();
     }
 
-    getMoreBtn.onclick = async (e) => {
-        if (page == maxPage) return;
-        page++;
-        await searchMorePokemon();
-    }
-
     modalOverlay.addEventListener("click", (e) => {
         if (e.target == modalOverlay) toggleModal();
     })
@@ -133,4 +136,5 @@ window.onload = async () => {
 
     // run
     setCardListeners();
+    observer.observe(getMoreTrigger);
 }

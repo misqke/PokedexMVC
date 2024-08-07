@@ -291,6 +291,12 @@ button {
     
 }
 
+#get-more-trigger {
+    display: block;
+    padding: 1rem;
+    width: 100%;
+}
+
 
         @keyframes fade-in {
             from {

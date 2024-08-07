@@ -46,7 +46,7 @@ namespace PokedexMVC.Controllers
             var viewModel = new HomeViewModel();
             viewModel.Page = page;
             List<Pokemon> pokemons = Pokemon;
-
+            Console.WriteLine($"page: {page}");
 
             if (!string.IsNullOrEmpty(t)) {
                 List<string> types = t.Split(',').ToList();
@@ -58,7 +58,7 @@ namespace PokedexMVC.Controllers
                     }
                 }
             }
-
+            Console.WriteLine(pokemons.Count);
             if (string.IsNullOrEmpty(s))
             {
                 viewModel.MaxPage = (int)Math.Ceiling((double)pokemons.Count / (double)PerPage);
@@ -81,7 +81,7 @@ namespace PokedexMVC.Controllers
                 pokemons = pokemons.Skip(PerPage * (page - 1)).Take(PerPage).ToList();
             }
             viewModel.Pokemons = pokemons;
-
+            Console.WriteLine(pokemons.Count);
             return page == 1 ? PartialView("_PokemonCardContainer", viewModel) : PartialView("_PokemonCardList", viewModel);
         }
 
